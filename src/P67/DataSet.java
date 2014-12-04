@@ -7,8 +7,14 @@ import java.util.Scanner;
 public class DataSet {
     public static void main(String[] args) throws FileNotFoundException {
         double[] nums = readDoubleArray("src/dataset/text.txt");
-        System.out.println(mean(nums));
-        System.out.println(stnddev(nums));
+        //print array
+        for (double num:nums){
+        System.out.println(num);
+        }
+        //print mean
+        System.out.println("mean: "+mean(nums));
+        //print stdev
+        System.out.println("stdev: "+stnddev(nums));
     }
     
     public static double mean(double[] nums) {
@@ -33,19 +39,23 @@ public class DataSet {
     
     public static double[] readDoubleArray(String file) throws FileNotFoundException {
         Scanner scan = new Scanner(new File(file));
+        //get number of tokens in the file
         int count = 0;
         while(scan.hasNext()) {
             count++;
-            scan.nextLine();
+            scan.next();
         }
+        //flush toilet....
         scan.close();
         
+        //Re-scan file and fill array with length equal to count from above 
         scan = new Scanner(new File(file));
         double[] nums = new double[count];
         for (int i = 0; i < nums.length; i++) {
             nums[i] = scan.nextDouble();
         }
         
+        //return array for use in mean() and stnddev()
         return nums;
     }
 }
